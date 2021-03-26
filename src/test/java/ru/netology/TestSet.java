@@ -18,7 +18,7 @@ public class TestSet {
     }
 
     public static String setFIO (){
-        return faker.name().fullName();
+        return faker.name().name();
     }
 
     public static String  setCity(){
