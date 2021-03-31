@@ -1,8 +1,6 @@
 package ru.netology;
 
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
