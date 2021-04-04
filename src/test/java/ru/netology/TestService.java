@@ -6,24 +6,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 
-public class TestSet {
+public class TestService {
     private static Faker faker = new Faker(new Locale("ru"));
 
-    private  TestSet(){};
+    private TestService(){};
 
-    public static String setDate(int date) {
+    public static String serviceDate(int date) {
         return LocalDate.now().plusDays(date).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
-    public static String setFIO (){
+    public static String serviceFIO (){
         return faker.name().name();
     }
 
-    public static String  setCity(){
+    public static String  serviceCity(){
        return faker.address().cityName();
        }
 
-    public static String setPhone(){
+    public static String servicePhone(){
          return faker.phoneNumber().phoneNumber();
     }
 

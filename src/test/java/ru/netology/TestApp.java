@@ -1,5 +1,6 @@
 package ru.netology;
 
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
@@ -23,21 +24,23 @@ public class TestApp {
 
     @Test
     void shouldTestValidation() {
-        $("[data-test-id=city] input").setValue(TestSet.setCity());
+        $("[data-test-id=city] input").setValue(TestService.serviceCity());
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $("[data-test-id=date] input").setValue(TestSet.setDate(3));
-        $("[data-test-id=name] input").setValue(TestSet.setFIO());
-        $("[data-test-id=phone] input").setValue(TestSet.setPhone());
+        $("[data-test-id=date] input").setValue(TestService.serviceDate(3));
+        $("[data-test-id=name] input").setValue(TestService.serviceFIO());
+        $("[data-test-id=phone] input").setValue(TestService.servicePhone());
         $("[data-test-id=agreement]").click();
         $(withText("Запланировать")).click();
         $("[data-test-id='success-notification']").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Успешно!"));
-        assertEquals(TestSet.setDate(3), $("[data-test-id=date] input").getValue());
+        assertEquals(TestService.serviceDate(3), $("[data-test-id=date] input").getValue());
+        assertEquals("Встреча успешно запланирована на " + TestService.serviceDate(3), $(withText("Встреча успешно запланирована на")).getText());
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $("[data-test-id=date] input").setValue(TestSet.setDate(5));
+        $("[data-test-id=date] input").setValue(TestService.serviceDate(5));
         $(withText("Запланировать")).click();
         $(withText("Перепланировать")).click();
         $("[data-test-id='success-notification']").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Успешно!"));
-        assertEquals(TestSet.setDate(5), $("[data-test-id=date] input").getValue());
+        assertEquals(TestService.serviceDate(5), $("[data-test-id=date] input").getValue());
+        assertEquals("Встреча успешно запланирована на " + TestService.serviceDate(5), $(withText("Встреча успешно запланирована на")).getText());
     }
 
 }
